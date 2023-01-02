@@ -83,7 +83,7 @@ def obtener_recibo(
         print(f"El ticket se encuentra en proceso: {ticket_response}")
 
     if ticket_response.receipt_certificate:
-        output_file = output_folder.joinpath(ticket)
+        output_file = output_folder.joinpath(f"{ticket}.zip")
         print(f"Guardando el ticket en {output_file}")
         base64_to_file(
             base64_string=ticket_response.receipt_certificate,
