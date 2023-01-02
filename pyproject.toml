@@ -1,0 +1,47 @@
+[tool.poetry]
+name = "envio-comprobantes"
+version = "0.1.0"
+description = "Envio de comprobantes a SUNAT"
+authors = ["Hector Aguirre <hector.aguirre.arista@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "envio_comprobantes" }]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "^2.28.1"
+typer = { version = "^0.7.0", extras = ["all"] }
+pydantic = "^1.10.4"
+python-dotenv = "^0.21.0"
+
+[tool.poetry.group.linters]
+optional = true
+[tool.poetry.group.linters.dependencies]
+safety = "^1.10.3"
+black = "^22.3.0"
+flake8 = "^4.0.1"
+isort = "^5.10.1"
+
+[tool.poetry.group.test]
+optional = true
+[tool.poetry.group.test.dependencies]
+pytest = "^7.0.1"
+coverage = "^6.3.2"
+pytest-cov = "^3.0.0"
+pytest-mock = "^3.7.0"
+responses = "^0.21.0"
+
+[tool.poetry.group.dev]
+optional = true
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^2.17.0"
+safety = "^1.10.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+# Pytest
+[tool.pytest.ini_options]
+asyncio_mode = 'auto'
+# log_cli = 1
+log_cli_level = 'INFO'
