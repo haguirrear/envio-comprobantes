@@ -1,20 +1,21 @@
+import base64
+import hashlib
 import logging
 import zipfile
-from pathlib import Path
-import hashlib
-import base64
 from dataclasses import dataclass
+from pathlib import Path
+from typing import BinaryIO
 
 from sunat_api.exceptions import FailHashFile, FailZipFile
 
 logger = logging.getLogger(__name__)
 
 
-def zip_single_file(zip_path: Path, filename: str):
+def zip_single_file(zip_handle: BinaryIO, filename: str):
     logger.debug(f"Zipping {filename}")
 
     try:
-        with zipfile.ZipFile(str(zip_path), "w") as archive:
+        with zipfile.ZipFile(zip_handle, "w") as archive:
             archive.write(filename)
     except Exception as e:
         logger.exception("Fail to zip File")
@@ -27,14 +28,14 @@ class HashBase64:
     base64: str
 
 
-def hash_base64_encode_file(filename: Path) -> HashBase64:
+def hash_base64_encode_file(file_handle: BinaryIO) -> HashBase64:
     sha256_hash = hashlib.sha256()
     base64_file = None
     try:
-        with filename.open("rb") as f:
-            file_bytes = f.read()
-            sha256_hash.update(file_bytes)
-            base64_file = base64.b64encode(file_bytes).decode("ASCII")
+
+        file_bytes = file_handle.read()
+        sha256_hash.update(file_bytes)
+        base64_file = base64.b64encode(file_bytes).decode("ASCII")
 
         hash = sha256_hash.hexdigest()
     except Exception as e:

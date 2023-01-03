@@ -30,12 +30,6 @@ def enviar_recibo(
         file_okay=True,
         help="Ruta al archivo xml que se quiere enviar a SUNAT",
     ),
-    zip_folder: Path = typer.Argument(
-        Path.cwd(),
-        exists=True,
-        dir_okay=True,
-        help="Carpeta donde se quiere guardar el ZIP generado para enviar a SUNAT. Si no es proporcionada se guardara en la carpeta actual",
-    ),
     user: str = typer.Option(
         ...,
         "--user",
@@ -50,21 +44,30 @@ def enviar_recibo(
         prompt="Por favor intruduce la clave SOL",
         help="Clave SOL",
     ),
+    client_id: str = typer.Option(
+        ...,
+        prompt="Por favor introduce el client_id a usar",
+        help="Client Id para el uso de la API de SUNAT",
+    ),
+    client_secret: str = typer.Option(
+        ...,
+        prompt="Por favor introduce el client_secret a usar",
+        help="Client Secret para el uso de la API de SUNAT",
+    ),
 ):
     """
     Envía un recibo (XML) a SUNAT usando la API REST. El archivo XML debe tener
     el nombre de acuerdo al formato establecido por SUNAT
     """
     service = SunatService(
-        client_id=settings.CLIENT_ID,
-        client_secret=settings.CLIENT_SECRET,
+        client_id=client_id,
+        client_secret=client_secret,
         password=password,
         username=user,
     )
 
     ticket = service.send_receipt(
         file_path=file,
-        zip_folder=zip_folder,
     )
 
     print("Recibo enviado correctamente!")
@@ -96,14 +99,24 @@ def obtener_recibo(
         prompt="Por favor intruduce la clave SOL",
         help="Clave SOL",
     ),
+    client_id: str = typer.Option(
+        ...,
+        prompt="Por favor introduce el client_id a usar",
+        help="Client Id para el uso de la API de SUNAT",
+    ),
+    client_secret: str = typer.Option(
+        ...,
+        prompt="Por favor introduce el client_secret a usar",
+        help="Client Secret para el uso de la API de SUNAT",
+    ),
 ):
     """
     Obtiene un ticket previamente enviado a SUNAT usando la API REST. Se debe proporcionar
     un ticket.
     """
     service = SunatService(
-        client_id=settings.CLIENT_ID,
-        client_secret=settings.CLIENT_SECRET,
+        client_id=client_id,
+        client_secret=client_secret,
         password=password,
         username=user,
     )

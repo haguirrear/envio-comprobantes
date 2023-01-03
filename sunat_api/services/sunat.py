@@ -1,4 +1,5 @@
 from typing import Any, Optional
+import tempfile
 import requests
 from urllib.parse import urlencode
 from sunat_api.exceptions import (
@@ -81,21 +82,22 @@ class SunatService:
 
         self.client.headers.update({"Authorization": f"Bearer {self.auth_token}"})
 
-    def send_receipt(self, file_path: Path, zip_folder: Path) -> str:
+    def send_receipt(self, file_path: Path) -> str:
 
         filename = file_path.name.split(".")[0]
 
-        zip_path = zip_folder.joinpath(f"{filename}.zip")
+        zip_filename = f"{filename}.zip"
 
-        zip_single_file(zip_path=zip_path, filename=str(file_path))
-
-        hash_info = hash_base64_encode_file(zip_path)
+        with tempfile.SpooledTemporaryFile() as tmp:
+            zip_single_file(zip_handle=tmp, filename=str(file_path))
+            tmp.seek(0)
+            hash_info = hash_base64_encode_file(tmp)
 
         url = f"{settings.BASE_URL}/v1/contribuyente/gem/comprobantes/{filename}"
         hash_info.base64.replace("\n", "")
         payload = {
             "archivo": {
-                "nomArchivo": zip_path.name,
+                "nomArchivo": zip_filename,
                 "arcGreZip": hash_info.base64,
                 "hashZip": hash_info.hash,
             }

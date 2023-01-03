@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?><DespatchAdvice xmlns="urn:oasis:names:specification:ubl:schema:xsd:DespatchAdvice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:sac="urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponents-1" xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ext:UBLExtensions>
+<ext:UBLExtension>
+<ext:ExtensionContent>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="SignatureSP"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>04ltHaCqr7ypyEXJJCw0qHI49/E=</DigestValue></Reference></SignedInfo><SignatureValue>mnVAsWY/AJB7YwjNVlNKHIoXqe8LpJJCu2LtIq9s40ELn1h1Z48k0GylCgh+vY6a5WskzKf5Jcc7&#13;
+IuvCwrH883Q4LPgotof/+VTgNTuGSxy8ThYYe/rGPkNUJnvLsAXcObPLXVo7av3luMuFdRF7JHr4&#13;
+IZq4T6F/T/6ISv7o44KvqdRGp7CaKPzq5vBxGrnzexyKJJUIzvm6JO8z0GjUN9QqQCG2INyTNxTJ&#13;
+xZzQV6c7Bt1iDWvGNnxowGeXe26Wp2USKaG/P4dF1/AH12qPZhpiNajWh2snAOBr5yqcSfxZ0Z7U&#13;
+/P8BddpcXLXUiXz99mLRZqaAF9FG5znfZgQvYg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=||USO TRIBUTARIO|| ELWA SRLTDA CDT 20252923242,OU=20252923242,OU=EREP_SUNAT_2021000153052,2.5.4.97=#0c114e545250452d3230323532393233323432,O=ELWA SRLTDA,L=MIRAFLORES,ST=LIMA-LIMA,C=PE</X509SubjectName><X509Certificate>MIIIcTCCBlmgAwIBAgIUClK9tCpuxQd1+BCsSa72NjGV5nUwDQYJKoZIhvcNAQELBQAwbDELMAkG&#13;
+A1UEBhMCUEUxPDA6BgNVBAoMM1JlZ2lzdHJvIE5hY2lvbmFsIGRlIElkZW50aWZpY2FjacOzbiB5&#13;
+IEVzdGFkbyBDaXZpbDEfMB0GA1UEAwwWRUNFUC1SRU5JRUMgQ0EgQ2xhc3MgMTAeFw0yMTA3MjAw&#13;
+MzI0MTVaFw0yNDA3MTkwMzI0MTVaMIHaMQswCQYDVQQGEwJQRTESMBAGA1UECAwJTElNQS1MSU1B&#13;
+MRMwEQYDVQQHDApNSVJBRkxPUkVTMRQwEgYDVQQKDAtFTFdBIFNSTFREQTEaMBgGA1UEYQwRTlRS&#13;
+UEUtMjAyNTI5MjMyNDIxITAfBgNVBAsMGEVSRVBfU1VOQVRfMjAyMTAwMDE1MzA1MjEUMBIGA1UE&#13;
+CwwLMjAyNTI5MjMyNDIxNzA1BgNVBAMMLnx8VVNPIFRSSUJVVEFSSU98fCBFTFdBIFNSTFREQSBD&#13;
+RFQgMjAyNTI5MjMyNDIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDUsA8FNwCxhQa+&#13;
+dk7eGzIKn7M3RBaCQOYFbslcdLZJ8WrS9E/kO6ylZ7A4NbwPOAzjF9iLAADFmUr1tSO7jIlQFqAq&#13;
+1YeD4KpI8qwiIgriuMAkVeUV47eiqvH3Oa166v+SvoDIwe0N3+LUbx/+TABWXVe0QRIgBk6ojLmA&#13;
+R1OcY3AgALq4K/07PkzjQUsowLDuW7T971kHuQH1S6NjiVX7BhMsiVopYLfGF2XMxhXuK9dnLrE5&#13;
+SnJYnIsQI8l2KJXysUebTe7zDOOGav5TqtsuTS6icHf7XsOhhvfi8/yU75WGAG0Cc/hrOnA8vTb+&#13;
+SXyvZdTKAcwqDd2F7JMWXu6HAgMBAAGjggOaMIIDljAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaA&#13;
+FEMVbvDT0WsbKTNBLVWscSLRPKVdMG4GCCsGAQUFBwEBBGIwYDA3BggrBgEFBQcwAoYraHR0cDov&#13;
+L2NydC5yZW5pZWMuZ29iLnBlL3Jvb3QzL2NhY2xhc3MxLmNydDAlBggrBgEFBQcwAYYZaHR0cDov&#13;
+L29jc3AucmVuaWVjLmdvYi5wZTCCAjcGA1UdIASCAi4wggIqMHcGESsGAQQBgpNkAgEDAQBlh2gA&#13;
+MGIwMQYIKwYBBQUHAgEWJWh0dHBzOi8vd3d3LnJlbmllYy5nb2IucGUvcmVwb3NpdG9yeS8wLQYI&#13;
+KwYBBQUHAgEWIVBvbO10aWNhIEdlbmVyYWwgZGUgQ2VydGlmaWNhY2nzbjCBxAYRKwYBBAGCk2QC&#13;
+AQMBAGeHaAAwga4wMgYIKwYBBQUHAgEWJmh0dHBzOi8vcGtpLnJlbmllYy5nb2IucGUvcmVwb3Np&#13;
+dG9yaW8vMHgGCCsGAQUFBwICMGweagBEAGUAYwBsAGEAcgBhAGMAaQDzAG4AIABkAGUAIABQAHIA&#13;
+4QBjAHQAaQBjAGEAcwAgAGQAZQAgAEMAZQByAHQAaQBmAGkAYwBhAGMAaQDzAG4AIABFAEMARQBQ&#13;
+AC0AUgBFAE4ASQBFAEMwgecGESsGAQQBgpNkAgEDAQFnh3MDMIHRMIHOBggrBgEFBQcCAjCBwR6B&#13;
+vgBDAGUAcgB0AGkAZgBpAGMAYQBkAG8AIABEAGkAZwBpAHQAYQBsACAAVAByAGkAYgB1AHQAYQBy&#13;
+AGkAbwAgAHAAYQByAGEAIABBAGcAZQBuAHQAZQAgAEEAdQB0AG8AbQBhAHQAaQB6AGEAZABvACAA&#13;
+QwBsAGEAcwBzACAAMQAsACAAZQBuACAAYwB1AG0AcABsAGkAbQBpAGUAbgB0AG8AIABkAGUAbAAg&#13;
+AEQATAAgAE4AugAgADEAMwA3ADAwEwYDVR0lBAwwCgYIKwYBBQUHAwQwdgYDVR0fBG8wbTA0oDKg&#13;
+MIYuaHR0cDovL2NybC5yZW5pZWMuZ29iLnBlL2NybC9zaGEyL2NhY2xhc3MxLmNybDA1oDOgMYYv&#13;
+aHR0cDovL2NybDIucmVuaWVjLmdvYi5wZS9jcmwvc2hhMi9jYWNsYXNzMS5jcmwwHQYDVR0OBBYE&#13;
+FHUDzBkHWV4vvG6eU3WHO4lyaUnUMA4GA1UdDwEB/wQEAwIGwDANBgkqhkiG9w0BAQsFAAOCAgEA&#13;
+a7cyEOP5BebAWi1D1LOhWAH+IllXYvWuJ7IRcIjgHvL6KNZlmtFwEjEvS9IB7HGkT5OMrEmq/sHf&#13;
+5Ug+rg6c6b+NkxPboV/zosZIz50LN67mfftnJwV70vbXyx4bVxBpkmbofjI0ePL8wYv589z0/3TE&#13;
+MgWUEdDw03m1ZTsAV/ynzh6gWw+884y4Gp5cZedLHG2/ZVAHIs19MsJLEcCAhlxouw4eTyXnogyL&#13;
+98XWaas1kKylUqLlFjjgu8suVV8jbxBfEXmRtAnY0XMQNXtfxgeX8ULRSgeBbzkwRiU3cqUYiOa2&#13;
+CvccwLx8zJPc1Hd2pkYta7yk7MPNNlCC+Lya5uTmEWOHh9urg2NbvUweaquCBQNvxmiXriB93r5+&#13;
+aN866Ouue2qXDxfHHqqoezfX28wwXSjPdTp7chRC9YugjuBDDq0j4GNcnI/J/cu3eSSt+iUrR9zc&#13;
+CGTd6kZl0dCKOP+3TtMwIOvjmAxLgsHnzO/xicP5YszoRJ+SNEoj84EnApN7dMzt+vUf3sLsEQlo&#13;
++/Cokzp+VGz8FP9wOBox0y5Fe8qemHM9rjJEL7nwfaqHYPEmyrfQ7Y8Q3n5Go1/JCKsbyEBB6tAM&#13;
+HgqpnvF5x8RpcQ1RtajAlUncsquwvhcDFpXTy4bYnRq/76VN0GZoEeVD2QqpVS3LhL7F/cXa9RQ=</X509Certificate></X509Data></KeyInfo></Signature></ext:ExtensionContent>
+</ext:UBLExtension>
+</ext:UBLExtensions><cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+<cbc:CustomizationID>2.0</cbc:CustomizationID>
+<!--Numeración, conformada por serie y número correlativo-->
+<cbc:ID>T001-00000001</cbc:ID>
+<!--Fecha de emisión-->
+<cbc:IssueDate>2023-01-02</cbc:IssueDate>
+<cbc:IssueTime>18:16:28</cbc:IssueTime>
+<!--Tipo de documento -->
+<cbc:DespatchAdviceTypeCode>09</cbc:DespatchAdviceTypeCode><cac:DespatchSupplierParty>
+<cac:Party>
+<cac:PartyIdentification>
+<cbc:ID schemeAgencyName="PE:SUNAT" schemeID="6" schemeName="Documento de Identidad" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06">20252923242</cbc:ID>
+</cac:PartyIdentification>
+<cac:PartyLegalEntity>
+<cbc:RegistrationName>ELWA S.R.L.</cbc:RegistrationName>
+</cac:PartyLegalEntity>
+</cac:Party>
+</cac:DespatchSupplierParty><cac:DeliveryCustomerParty>
+<cbc:CustomerAssignedAccountID schemeID="6">20208423003</cbc:CustomerAssignedAccountID>
+<cac:Party>
+<cac:PartyLegalEntity>
+<cbc:RegistrationName>Sales y Derivados de Cobre S.A.</cbc:RegistrationName>
+</cac:PartyLegalEntity>
+</cac:Party>
+</cac:DeliveryCustomerParty><cac:Shipment>
+<cbc:ID>1</cbc:ID>
+<cbc:HandlingCode>01</cbc:HandlingCode>
+<cbc:Information>Venta</cbc:Information>
+<cbc:GrossWeightMeasure unitCode="KG">0</cbc:GrossWeightMeasure>
+<cbc:TotalTransportHandlingUnitQuantity>0</cbc:TotalTransportHandlingUnitQuantity>
+<cbc:SplitConsignmentIndicator>false</cbc:SplitConsignmentIndicator><cac:ShipmentStage>
+	<cbc:TransportModeCode>02</cbc:TransportModeCode>
+	<cac:TransitPeriod>
+		<cbc:StartDate>2023-01-02</cbc:StartDate>
+	</cac:TransitPeriod>
+	<cac:CarrierParty>
+		<cac:PartyIdentification>
+			<cbc:ID schemeID="6">20609824132</cbc:ID>
+		</cac:PartyIdentification>
+		<cac:PartyName>
+			<cbc:Name><![CDATA[MAESGRA E.I.R.L.]]></cbc:Name>
+		</cac:PartyName>
+	</cac:CarrierParty>
+	<cac:TransportMeans>
+		<cac:RoadTransport>
+			<cbc:LicensePlateID/>
+		</cac:RoadTransport>
+	</cac:TransportMeans>
+	<cac:DriverPerson>
+		<cbc:ID schemeID=""/>
+	</cac:DriverPerson>
+</cac:ShipmentStage><cac:Delivery>
+	<cac:DeliveryAddress>
+		<cbc:ID>150125</cbc:ID>
+		<cbc:StreetName><![CDATA[Cal.4 Mz.B1 Lt.18  Urb.Las Vegas   Puente Piedra]]></cbc:StreetName>
+	</cac:DeliveryAddress>
+</cac:Delivery>
+<cac:TransportHandlingUnit>
+	<cac:TransportEquipment>
+		<cbc:ID/>
+	</cac:TransportEquipment>
+</cac:TransportHandlingUnit>
+<cac:OriginAddress>
+	<cbc:ID>150122</cbc:ID>
+	<cbc:StreetName><![CDATA[Calle Bellavista 274, Of. 501 - Miraflores]]></cbc:StreetName>
+</cac:OriginAddress></cac:Shipment><cac:DespatchLine>
+<cbc:ID>1</cbc:ID>
+<cbc:DeliveredQuantity unitCode="KGM">2.000</cbc:DeliveredQuantity>
+<cac:OrderLineReference>
+	<cbc:LineID>1</cbc:LineID>
+</cac:OrderLineReference>
+<cac:Item>
+	<cbc:Name><![CDATA[Oxido cuprico]]></cbc:Name>
+<cac:SellersItemIdentification>
+<cbc:ID><![CDATA[OXCU]]></cbc:ID>
+</cac:SellersItemIdentification>
+</cac:Item>
+</cac:DespatchLine>
+</DespatchAdvice>
