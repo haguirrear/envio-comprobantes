@@ -1,14 +1,14 @@
 from typing import Any, Optional
 import requests
 from urllib.parse import urlencode
-from envio_comprobantes.exceptions import (
+from sunat_api.exceptions import (
     FailAuthToken,
     FailObteinTicket,
     FailParseTicket,
     FailSendReceipt,
 )
-from envio_comprobantes.utils import hash_base64_encode_file, zip_single_file
-from envio_comprobantes.settings import settings
+from sunat_api.utils import hash_base64_encode_file, zip_single_file
+from sunat_api.settings import settings
 from pathlib import Path
 
 from pydantic import BaseModel, Field

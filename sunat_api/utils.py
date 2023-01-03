@@ -5,7 +5,7 @@ import hashlib
 import base64
 from dataclasses import dataclass
 
-from envio_comprobantes.exceptions import FailHashFile, FailZipFile
+from sunat_api.exceptions import FailHashFile, FailZipFile
 
 logger = logging.getLogger(__name__)
 
