@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "envio-comprobantes"
+name = "sunat"
 version = "0.1.0"
-description = "Envio de comprobantes a SUNAT"
+description = "Interactuar con el api de SUNAT"
 authors = ["Hector Aguirre <hector.aguirre.arista@gmail.com>"]
 readme = "README.md"
-packages = [{ include = "envio_comprobantes" }]
+packages = [{ include = "sunat" }]
 
 [tool.poetry.dependencies]
 python = "^3.9"

@@ -2,11 +2,11 @@ import logging
 from typing import Optional
 from pathlib import Path
 import typer
-from envio_comprobantes.services.sunat import SunatService
-from envio_comprobantes.settings import settings
+from sunat.services.sunat import SunatService
+from sunat.settings import settings
 from rich import print
 
-from envio_comprobantes.utils import base64_to_file
+from sunat.utils import base64_to_file
 
 logging.basicConfig(level=settings.LOG_LEVEL)
 
