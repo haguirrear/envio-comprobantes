@@ -66,7 +66,7 @@ def obtener(
 
 
 @app.command()
-def enviar_recibir(
+def enviar_obtener(
     file: Path = typer.Argument(
         ...,
         exists=True,
@@ -82,6 +82,10 @@ def enviar_recibir(
         help="Carpeta dodne guardar el ticket de SUNAT. Si no es proporcionada se guardara en la carpeta actual",
     ),
 ):
+    """
+    Envia un recibo y luego obtiene el ticket usando el API REST de SUNAT
+    (Simplificacion de los comandos "enviar" y "obtener")
+    """
     ticket = recibo.send(file)
 
     print(f"Se obtuvo el ticket: [bold red]{ticket}[\bold red]")
@@ -98,6 +102,7 @@ def enviar_recibir(
     elif ticket_response.response_code == "98":
         print(f"El ticket se encuentra en proceso: {ticket_response}")
 
+        time.sleep(2)
         count = 0
         while ticket_response.response_code == "98" and count < 10:
             time.sleep(2)
