@@ -1,8 +1,9 @@
+import base64
+import zipfile
 from pathlib import Path
 
 from sunat_api.services.sunat import SunatService, TicketResponse
 from sunat_api.settings import settings
-from sunat_api.utils import base64_to_file
 
 
 def send(file: Path) -> str:
@@ -38,11 +39,20 @@ def get(
     return ticket_response
 
 
-def save_ticket(ticket: str, ticket_response: TicketResponse, output_folder: Path):
+def save_ticket(ticket_response: TicketResponse, output_folder: Path):
     if ticket_response.receipt_certificate:
-        output_file = output_folder.joinpath(f"{ticket}.zip")
-        print(f"Guardando el ticket en {output_file}")
-        base64_to_file(
-            base64_string=ticket_response.receipt_certificate,
-            filepath=output_file,
-        )
+
+        output_zipfile = output_folder.joinpath("temp.zip")
+        with output_zipfile.open("wb") as tmp:
+            decoded_data = base64.decodebytes(
+                ticket_response.receipt_certificate.encode("ASCII")
+            )
+            tmp.write(decoded_data)
+            tmp.seek(0)
+
+        with zipfile.ZipFile(str(output_zipfile), "r") as zip_tmp:
+            output_file = output_folder.joinpath(zip_tmp.filelist[0].filename)
+            print(f"Guardando el ticket en {output_file}")
+            zip_tmp.extractall(str(output_folder))
+
+        output_zipfile.unlink()

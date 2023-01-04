@@ -49,7 +49,7 @@ def obtener(
     """
 
     ticket_response = recibo.get(ticket)
-    recibo.save_ticket(ticket, ticket_response, output_folder)
+    recibo.save_ticket(ticket_response, output_folder)
 
     if ticket_response.response_code == constants.TICKET_ERROR_RESPONSE_CODE:
         print(
@@ -110,4 +110,7 @@ def enviar_obtener(
         )
         typer.Exit(code=1)
     elif ticket_response.is_success:
-        recibo.save_ticket(ticket, ticket_response, output_folder)
+        print(f"Recibo obtenido con exito:\n{ticket_response}")
+
+    if ticket_response.receipt_certificate:
+        recibo.save_ticket(ticket_response, output_folder)

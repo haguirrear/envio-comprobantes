@@ -3,7 +3,7 @@ from typing import Optional
 import typer
 from rich import print
 
-from sunat_api.settings import settings
+from sunat_api.settings import get_config_path, settings
 
 app = typer.Typer()
 
@@ -14,6 +14,18 @@ def show():
     Mostrar las configuraciones y credenciales del programa
     """
     print(settings.dict())
+
+
+@app.command()
+def clear():
+    """
+    Borra las configuraciones seteadas previamente
+    """
+
+    config_path = get_config_path()
+
+    config_path.write_text("")
+    print("Se borró correctamente todas las configuraciones guardadas")
 
 
 @app.command()
