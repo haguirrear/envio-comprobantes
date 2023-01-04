@@ -5,7 +5,7 @@ import typer
 from sunat_api.services.sunat import SunatService
 from sunat_api.settings import settings
 from rich import print
-
+from sunat_api.subcommands import config
 from sunat_api.utils import base64_to_file
 
 logging.basicConfig(level=settings.LOG_LEVEL)
@@ -20,6 +20,57 @@ if settings.LOG_LEVEL == "DEBUG":
 
 
 app = typer.Typer()
+app.add_typer(
+    config.app,
+    name="config",
+    help="Ver o modificar las configuraciones y credenciales",
+)
+
+
+@app.callback()
+def main(
+    user: Optional[str] = typer.Option(
+        None,
+        "--user",
+        "-u",
+        help="Usuario (RUC+Usuario SOL)",
+    ),
+    password: Optional[str] = typer.Option(
+        None,
+        "--password",
+        "-p",
+        help="Clave SOL",
+    ),
+    client_id: Optional[str] = typer.Option(
+        None,
+        help="Client Id para el uso de la API de SUNAT",
+    ),
+    client_secret: Optional[str] = typer.Option(
+        None,
+        help="Client Secret para el uso de la API de SUNAT",
+    ),
+    base_auth_url: Optional[str] = typer.Option(
+        None, help="URL base para el endpoint de obtener Token"
+    ),
+    base_url: Optional[str] = typer.Option(
+        None, help="URL base para las apis de SUNAT"
+    ),
+    log_level: Optional[str] = typer.Option(None, help="Log level"),
+):
+    if user is not None:
+        settings.USER = user
+    if password is not None:
+        settings.PASSWORD = password
+    if client_id is not None:
+        settings.CLIENT_ID = client_id
+    if client_secret is not None:
+        settings.CLIENT_SECRET = client_secret
+    if base_auth_url is not None:
+        settings.BASE_AUTH_URL = base_auth_url
+    if base_url is not None:
+        settings.BASE_URL = base_url
+    if log_level is not None:
+        settings.LOG_LEVEL = log_level
 
 
 @app.command()
@@ -30,40 +81,16 @@ def enviar_recibo(
         file_okay=True,
         help="Ruta al archivo xml que se quiere enviar a SUNAT",
     ),
-    user: str = typer.Option(
-        ...,
-        "--user",
-        "-u",
-        prompt="Por favor intruduce el usuario",
-        help="Usuario (RUC+Usuario SOL)",
-    ),
-    password: str = typer.Option(
-        ...,
-        "--password",
-        "-p",
-        prompt="Por favor intruduce la clave SOL",
-        help="Clave SOL",
-    ),
-    client_id: str = typer.Option(
-        ...,
-        prompt="Por favor introduce el client_id a usar",
-        help="Client Id para el uso de la API de SUNAT",
-    ),
-    client_secret: str = typer.Option(
-        ...,
-        prompt="Por favor introduce el client_secret a usar",
-        help="Client Secret para el uso de la API de SUNAT",
-    ),
 ):
     """
     Envía un recibo (XML) a SUNAT usando la API REST. El archivo XML debe tener
     el nombre de acuerdo al formato establecido por SUNAT
     """
     service = SunatService(
-        client_id=client_id,
-        client_secret=client_secret,
-        password=password,
-        username=user,
+        client_id=settings.CLIENT_ID,
+        client_secret=settings.CLIENT_SECRET,
+        password=settings.PASSWORD,
+        username=settings.USER,
     )
 
     ticket = service.send_receipt(
@@ -81,33 +108,11 @@ def obtener_recibo(
     ),
     output_folder: Optional[Path] = typer.Option(
         Path.cwd(),
+        "--output-folder",
+        "-o",
         exists=True,
         dir_okay=True,
         help="Carpeta dodne guardar el ticket de SUNAT. Si no es proporcionada se guardara en la carpeta actual",
-    ),
-    user: str = typer.Option(
-        ...,
-        "--user",
-        "-u",
-        prompt="Por favor intruduce el usuario",
-        help="Usuario (RUC+Usuario SOL)",
-    ),
-    password: str = typer.Option(
-        ...,
-        "--password",
-        "-p",
-        prompt="Por favor intruduce la clave SOL",
-        help="Clave SOL",
-    ),
-    client_id: str = typer.Option(
-        ...,
-        prompt="Por favor introduce el client_id a usar",
-        help="Client Id para el uso de la API de SUNAT",
-    ),
-    client_secret: str = typer.Option(
-        ...,
-        prompt="Por favor introduce el client_secret a usar",
-        help="Client Secret para el uso de la API de SUNAT",
     ),
 ):
     """
@@ -115,10 +120,10 @@ def obtener_recibo(
     un ticket.
     """
     service = SunatService(
-        client_id=client_id,
-        client_secret=client_secret,
-        password=password,
-        username=user,
+        client_id=settings.CLIENT_ID,
+        client_secret=settings.CLIENT_SECRET,
+        password=settings.PASSWORD,
+        username=settings.USER,
     )
 
     ticket_response = service.get_ticket(ticket)
