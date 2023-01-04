@@ -1,14 +1,11 @@
 import time
-from typing import Optional
 from pathlib import Path
-import typer
-from sunat_api.services.sunat import SunatService
-from sunat_api.settings import settings
-from rich import print
-from sunat_api.subcommands import config
-from sunat_api.utils import base64_to_file
-import typer
+from typing import Optional
 
+import typer
+from rich import print
+
+from sunat_api import constants
 from sunat_api.services import recibo
 
 app = typer.Typer()
@@ -54,14 +51,14 @@ def obtener(
     ticket_response = recibo.get(ticket)
     recibo.save_ticket(ticket, ticket_response, output_folder)
 
-    if ticket_response.response_code == "99":
+    if ticket_response.response_code == constants.TICKET_ERROR_RESPONSE_CODE:
         print(
             f"[bold red]Hubo un error al obtener el ticket:[/bold red] {ticket_response}"
         )
         typer.Exit(code=1)
-    elif ticket_response.response_code == "0":
+    elif ticket_response.response_code == constants.TICKET_SUCCESS_RESPONSE_CODE:
         print(f"Se obtuvo el ticket: {ticket_response}")
-    elif ticket_response.response_code == "98":
+    elif ticket_response.response_code == constants.TICKET_PROCESING_RESPONSE_CODE:
         print(f"El ticket se encuentra en proceso: {ticket_response}")
 
 
@@ -87,29 +84,30 @@ def enviar_obtener(
     (Simplificacion de los comandos "enviar" y "obtener")
     """
     ticket = recibo.send(file)
+    print("[bold green]Recibo enviado correctamente![/bold green]")
+    print(f"Se generó el ticket: [bold green]{ticket}[/bold green]")
 
-    print(f"Se obtuvo el ticket: [bold red]{ticket}[\bold red]")
-
+    time.sleep(1)
     ticket_response = recibo.get(ticket)
 
-    if ticket_response.response_code == "99":
-        print(
-            f"[bold red]Hubo un error al obtener el ticket:[/bold red] {ticket_response}"
-        )
-        typer.Exit(code=1)
-    elif ticket_response.response_code == "0":
-        recibo.save_ticket(ticket, ticket_response, output_folder)
-    elif ticket_response.response_code == "98":
-        print(f"El ticket se encuentra en proceso: {ticket_response}")
+    if ticket_response.is_processing:
+        print("El ticket se encuentra en proceso...")
 
-        time.sleep(2)
         count = 0
-        while ticket_response.response_code == "98" and count < 10:
+        while ticket_response.is_processing and count < 10:
+            count += 1
             time.sleep(2)
             ticket_response = recibo.get(ticket)
-            count += 1
 
-        if ticket_response.response_code == "98":
+        if ticket_response.is_processing:
             print(
                 f"El recibo sigue en proceso: {ticket_response}. Puede consultarlo nuevo con este numero de ticket: {ticket}"
             )
+
+    if ticket_response.is_error:
+        print(
+            f"[bold red]Hubo un error al obtener el ticket:[/bold red]\n{ticket_response}"
+        )
+        typer.Exit(code=1)
+    elif ticket_response.is_success:
+        recibo.save_ticket(ticket, ticket_response, output_folder)

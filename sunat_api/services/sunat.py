@@ -1,21 +1,21 @@
-from typing import Any, Optional
+import logging
 import tempfile
-import requests
+from pathlib import Path
+from typing import Optional
 from urllib.parse import urlencode
+
+import requests
+from pydantic import BaseModel, Field
+
+from sunat_api import constants
 from sunat_api.exceptions import (
     FailAuthToken,
     FailObteinTicket,
     FailParseTicket,
     FailSendReceipt,
 )
-from sunat_api.utils import hash_base64_encode_file, zip_single_file
 from sunat_api.settings import settings
-from pathlib import Path
-
-from pydantic import BaseModel, Field
-from rich import print
-
-import logging
+from sunat_api.utils import hash_base64_encode_file, zip_single_file
 
 logger = logging.getLogger(__name__)
 
@@ -33,6 +33,18 @@ class TicketResponse(BaseModel):
     error: Optional[TicketError] = Field(None, alias="error")
     receipt_certificate: Optional[str] = Field(None, alias="arcCdr")
     CDR: bool = Field(alias="indCdrGenerado")
+
+    @property
+    def is_success(self) -> bool:
+        return self.response_code == constants.TICKET_SUCCESS_RESPONSE_CODE
+
+    @property
+    def is_error(self) -> bool:
+        return self.response_code == constants.TICKET_ERROR_RESPONSE_CODE
+
+    @property
+    def is_processing(self) -> bool:
+        return self.response_code == constants.TICKET_PROCESING_RESPONSE_CODE
 
     class Config:
         allow_population_by_field_name = True

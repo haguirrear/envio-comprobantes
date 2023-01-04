@@ -1,6 +1,8 @@
 from typing import Optional
+
 import typer
 from rich import print
+
 from sunat_api.settings import settings
 
 app = typer.Typer()

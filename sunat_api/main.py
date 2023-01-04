@@ -1,13 +1,10 @@
 import logging
 from typing import Optional
-from pathlib import Path
+
 import typer
-from sunat_api.services.sunat import SunatService
+
 from sunat_api.settings import settings
-from rich import print
-from sunat_api.subcommands import config
-from sunat_api.subcommands import recibo
-from sunat_api.utils import base64_to_file
+from sunat_api.subcommands import config, recibo
 
 logging.basicConfig(level=settings.LOG_LEVEL)
 
