@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sunat-api"
-version = "0.2.0"
+version = "0.2.1"
 description = "Interactuar con el api de SUNAT"
 authors = ["Hector Aguirre <hector.aguirre.arista@gmail.com>"]
 readme = "README.md"
@@ -11,7 +11,7 @@ packages = [{ include = "sunat_api" }]
 sunat-api = "sunat_api.main:app"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.7"
 requests = "^2.28.1"
 typer = { version = "^0.7.0", extras = ["all"] }
 pydantic = "^1.10.4"
