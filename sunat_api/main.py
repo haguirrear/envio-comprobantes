@@ -8,13 +8,15 @@ from sunat_api.subcommands import config, recibo
 
 logging.basicConfig(level=settings.LOG_LEVEL)
 
-if settings.LOG_LEVEL == "DEBUG":
-    from http.client import HTTPConnection
 
-    HTTPConnection.debuglevel = 1
-    requests_log = logging.getLogger("requests.packages.urllib3")
-    requests_log.setLevel(logging.DEBUG)
-    requests_log.propagate = True
+def config_log(settings):
+    if settings.LOG_LEVEL == "DEBUG":
+        from http.client import HTTPConnection
+
+        HTTPConnection.debuglevel = 1
+        requests_log = logging.getLogger("requests.packages.urllib3")
+        requests_log.setLevel(logging.DEBUG)
+        requests_log.propagate = True
 
 
 app = typer.Typer()
@@ -74,6 +76,8 @@ def main(
         settings.BASE_URL = base_url
     if log_level is not None:
         settings.LOG_LEVEL = log_level
+
+    config_log(settings)
 
 
 if __name__ == "__main__":

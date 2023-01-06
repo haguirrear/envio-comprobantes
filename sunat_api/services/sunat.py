@@ -96,7 +96,10 @@ class SunatService:
 
     def send_receipt(self, file_path: Path) -> str:
 
+        logger.debug("File to be zipped: %s", str(file_path))
+
         filename = file_path.name.split(".")[0]
+        logger.debug("Just filename: %s", filename)
 
         zip_filename = f"{filename}.zip"
 
@@ -119,6 +122,8 @@ class SunatService:
             response.raise_for_status()
         except Exception as e:
             logger.exception("Fail to send Receipt")
+            if getattr(e, "response") is not None:
+                logger.exception("Response Body: %s", e.response.text)
             raise FailSendReceipt(str(e))
 
         ticket_num = response.json()["numTicket"]
@@ -133,6 +138,8 @@ class SunatService:
             response.raise_for_status()
         except Exception as e:
             logger.exception("Fail to obtain Ticket")
+            if getattr(e, "response") is not None:
+                logger.exception("Response Body: %s", e.response.text)
             raise FailObteinTicket(str(e))
 
         try:
