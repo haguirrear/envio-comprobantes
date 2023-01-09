@@ -32,7 +32,7 @@ class TicketResponse(BaseModel):
     response_code: str = Field(alias="codRespuesta")
     error: Optional[TicketError] = Field(None, alias="error")
     receipt_certificate: Optional[str] = Field(None, alias="arcCdr")
-    CDR: bool = Field(alias="indCdrGenerado")
+    CDR: Optional[bool] = Field(None, alias="indCdrGenerado")
 
     @property
     def is_success(self) -> bool:
@@ -94,7 +94,7 @@ class SunatService:
 
         self.client.headers.update({"Authorization": f"Bearer {self.auth_token}"})
 
-    def send_receipt(self, file_path: Path) -> str:
+    def send_receipt(self, file_path: Path, write_zip: bool = False) -> str:
 
         logger.debug("File to be zipped: %s", str(file_path))
 
@@ -103,10 +103,17 @@ class SunatService:
 
         zip_filename = f"{filename}.zip"
 
+        bytes_info = None
         with tempfile.SpooledTemporaryFile() as tmp:
             zip_single_file(zip_handle=tmp, filename=str(file_path))
             tmp.seek(0)
             hash_info = hash_base64_encode_file(tmp)
+            tmp.seek(0)
+            bytes_info = tmp.read()
+
+        if write_zip:
+            with open(file_path.parent.joinpath(zip_filename), "wb") as zip_2:
+                zip_2.write(bytes_info)
 
         url = f"{settings.BASE_URL}/v1/contribuyente/gem/comprobantes/{filename}"
         hash_info.base64.replace("\n", "")

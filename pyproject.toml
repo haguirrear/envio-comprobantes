@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sunat-api"
-version = "0.2.2"
+version = "0.2.7"
 description = "Interactuar con el api de SUNAT"
 authors = ["Hector Aguirre <hector.aguirre.arista@gmail.com>"]
 readme = "README.md"

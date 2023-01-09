@@ -1,6 +1,9 @@
 import base64
 import zipfile
 from pathlib import Path
+from typing import Optional
+
+from rich import print
 
 from sunat_api.services.sunat import SunatService, TicketResponse
 from sunat_api.settings import settings
@@ -39,9 +42,13 @@ def get(
     return ticket_response
 
 
-def save_ticket(ticket_response: TicketResponse, output_folder: Path):
+def save_ticket(
+    ticket_response: TicketResponse,
+    output_folder: Path,
+    xml_name: Optional[str] = None,
+    error_folder: Optional[Path] = None,
+):
     if ticket_response.receipt_certificate:
-
         output_zipfile = output_folder.joinpath("temp.zip")
         with output_zipfile.open("wb") as tmp:
             decoded_data = base64.decodebytes(
@@ -52,7 +59,24 @@ def save_ticket(ticket_response: TicketResponse, output_folder: Path):
 
         with zipfile.ZipFile(str(output_zipfile), "r") as zip_tmp:
             output_file = output_folder.joinpath(zip_tmp.filelist[0].filename)
-            print(f"Guardando el ticket en {output_file}")
+            print(f"[bold green]Guardando el ticket en {output_file}[/bold green]")
             zip_tmp.extractall(str(output_folder))
 
         output_zipfile.unlink()
+    else:
+        print(
+            "[bold yellow]No se recibió ningun archivo del API de SUNAT[/bold yellow]"
+        )
+
+    if ticket_response.is_error:
+        if error_folder is not None:
+            error_file_name = xml_name.split(".")[0] + "_error.txt"
+            error_file_path = error_folder.joinpath(error_file_name)
+            print(f"[bold green]Guardando error en: {error_file_path}[/bold green]")
+            error_file_path.write_text(
+                f"Error Code: {ticket_response.error.num} | Detail: {ticket_response.error.detail}"
+            )
+        else:
+            print(
+                "[bold red]No se especifico una carpeta donde guardar el error[/bold red]"
+            )

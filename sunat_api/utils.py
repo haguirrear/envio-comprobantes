@@ -16,7 +16,7 @@ def zip_single_file(zip_handle: BinaryIO, filename: str):
 
     try:
         with zipfile.ZipFile(zip_handle, "w") as archive:
-            archive.write(filename)
+            archive.write(filename, arcname=Path(filename).name)
     except Exception as e:
         logger.exception("Fail to zip File")
         raise FailZipFile(str(e)) from e

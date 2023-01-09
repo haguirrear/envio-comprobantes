@@ -34,13 +34,13 @@ def obtener(
     ticket: str = typer.Argument(
         ..., help="Número de Ticket obtenido al enviar el recibo a SUNAT"
     ),
-    output_folder: Optional[Path] = typer.Option(
+    output_folder: Path = typer.Option(
         Path.cwd(),
         "--output-folder",
         "-o",
         exists=True,
         dir_okay=True,
-        help="Carpeta dodne guardar el ticket de SUNAT. Si no es proporcionada se guardara en la carpeta actual",
+        help="Carpeta donde guardar el ticket de SUNAT. Si no es proporcionada se guardara en la carpeta actual",
     ),
 ):
     """
@@ -76,7 +76,15 @@ def enviar_obtener(
         "-o",
         exists=True,
         dir_okay=True,
-        help="Carpeta dodne guardar el ticket de SUNAT. Si no es proporcionada se guardara en la carpeta actual",
+        help="Carpeta donde guardar el ticket de SUNAT. Si no es proporcionada se guardara en la carpeta actual",
+    ),
+    error_folder: Optional[Path] = typer.Option(
+        None,
+        "--error-folder",
+        "-e",
+        exists=True,
+        dir_okay=True,
+        help="Carpeta donde guardar el mensaje de error si es que existe",
     ),
 ):
     """
@@ -106,11 +114,14 @@ def enviar_obtener(
 
     if ticket_response.is_error:
         print(
-            f"[bold red]Hubo un error al obtener el ticket:[/bold red]\n{ticket_response}"
+            f"[bold red]Hubo un error al obtener el ticket:\n{ticket_response.error.num}: {ticket_response.error.detail}[/bold red]"
         )
-        typer.Exit(code=1)
     elif ticket_response.is_success:
-        print(f"Recibo obtenido con exito:\n{ticket_response}")
+        print(f"Recibo obtenido con exito:\n{ticket}")
 
-    if ticket_response.receipt_certificate:
-        recibo.save_ticket(ticket_response, output_folder)
+    recibo.save_ticket(
+        ticket_response,
+        output_folder,
+        xml_name=file.name,
+        error_folder=error_folder,
+    )
